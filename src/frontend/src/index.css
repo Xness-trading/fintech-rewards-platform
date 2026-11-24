@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 700;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 600;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+    --radius: 1rem;
+
+    /* Midnight Ledger — dark navy / black base with neon cyan + turquoise */
+    --background: 0.16 0.03 250;
+    --foreground: 0.96 0.01 220;
+    --card: 0.21 0.035 250;
+    --card-foreground: 0.96 0.01 220;
+    --popover: 0.19 0.035 250;
+    --popover-foreground: 0.96 0.01 220;
+
+    --primary: 0.82 0.15 195;
+    --primary-foreground: 0.15 0.03 250;
+
+    --secondary: 0.26 0.04 250;
+    --secondary-foreground: 0.9 0.01 220;
+    --muted: 0.26 0.04 250;
+    --muted-foreground: 0.66 0.02 230;
+
+    --accent: 0.85 0.13 175;
+    --accent-foreground: 0.15 0.03 175;
+
+    --destructive: 0.62 0.21 22;
+    --destructive-foreground: 0.97 0.01 22;
+
+    --success: 0.78 0.16 165;
+    --success-foreground: 0.15 0.03 165;
+    --warning: 0.8 0.15 85;
+    --warning-foreground: 0.16 0.03 85;
+
+    --border: 0.32 0.04 245;
+    --input: 0.3 0.04 245;
+    --ring: 0.82 0.15 195;
+
+    --chart-1: 0.82 0.15 195;
+    --chart-2: 0.85 0.13 175;
+    --chart-3: 0.7 0.16 230;
+    --chart-4: 0.78 0.16 165;
+    --chart-5: 0.8 0.15 85;
+
+    --sidebar: 0.14 0.03 250;
+    --sidebar-foreground: 0.94 0.01 220;
+    --sidebar-primary: 0.82 0.15 195;
+    --sidebar-primary-foreground: 0.15 0.03 250;
+    --sidebar-accent: 0.24 0.04 250;
+    --sidebar-accent-foreground: 0.92 0.01 220;
+    --sidebar-border: 0.28 0.04 245;
+    --sidebar-ring: 0.82 0.15 195;
+
+    /* Extended tokens */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.82 0.15 195) 0%,
+      oklch(0.85 0.13 175) 100%
+    );
+    --gradient-glow: radial-gradient(
+      60% 60% at 50% 0%,
+      oklch(0.82 0.15 195 / 0.22) 0%,
+      transparent 70%
+    );
+    --gradient-surface: linear-gradient(
+      160deg,
+      oklch(0.23 0.04 250 / 0.9) 0%,
+      oklch(0.18 0.03 250 / 0.75) 100%
+    );
+    --glass-bg: oklch(0.24 0.04 250 / 0.55);
+    --glass-border: oklch(0.82 0.15 195 / 0.22);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark {
+    --background: 0.16 0.03 250;
+    --foreground: 0.96 0.01 220;
+    --card: 0.21 0.035 250;
+    --card-foreground: 0.96 0.01 220;
+    --popover: 0.19 0.035 250;
+    --popover-foreground: 0.96 0.01 220;
+
+    --primary: 0.82 0.15 195;
+    --primary-foreground: 0.15 0.03 250;
+
+    --secondary: 0.26 0.04 250;
+    --secondary-foreground: 0.9 0.01 220;
+    --muted: 0.26 0.04 250;
+    --muted-foreground: 0.66 0.02 230;
+
+    --accent: 0.85 0.13 175;
+    --accent-foreground: 0.15 0.03 175;
+
+    --destructive: 0.62 0.21 22;
+    --destructive-foreground: 0.97 0.01 22;
+
+    --success: 0.78 0.16 165;
+    --success-foreground: 0.15 0.03 165;
+    --warning: 0.8 0.15 85;
+    --warning-foreground: 0.16 0.03 85;
+
+    --border: 0.32 0.04 245;
+    --input: 0.3 0.04 245;
+    --ring: 0.82 0.15 195;
+
+    --chart-1: 0.82 0.15 195;
+    --chart-2: 0.85 0.13 175;
+    --chart-3: 0.7 0.16 230;
+    --chart-4: 0.78 0.16 165;
+    --chart-5: 0.8 0.15 85;
+
+    --sidebar: 0.14 0.03 250;
+    --sidebar-foreground: 0.94 0.01 220;
+    --sidebar-primary: 0.82 0.15 195;
+    --sidebar-primary-foreground: 0.15 0.03 250;
+    --sidebar-accent: 0.24 0.04 250;
+    --sidebar-accent-foreground: 0.92 0.01 220;
+    --sidebar-border: 0.28 0.04 245;
+    --sidebar-ring: 0.82 0.15 195;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: var(--gradient-glow);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .transition-spring {
+    transition: var(--transition-spring);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+  .glass {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--glass-border);
+  }
+  .glass-strong {
+    background-color: oklch(0.22 0.04 250 / 0.78);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid oklch(0.82 0.15 195 / 0.28);
+  }
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-primary {
+    box-shadow: 0 0 0 1px oklch(0.82 0.15 195 / 0.4), 0 8px 32px -8px
+      oklch(0.82 0.15 195 / 0.45);
+  }
+  .glow-accent {
+    box-shadow: 0 0 0 1px oklch(0.85 0.13 175 / 0.45), 0 8px 32px -8px
+      oklch(0.85 0.13 175 / 0.5);
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}

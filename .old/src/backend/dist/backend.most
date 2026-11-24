@@ -1,0 +1,410 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AdminSettings__1063935313 =
+  {companyUpiId : Text; minWithdrawalAmount : Nat; paymentQrImage : ?Blob};
+type AdminSettings__1068423478 =
+  {
+    companyUpiId : Text;
+    minWithdrawalAmount : Nat;
+    paymentQrImage : ?FileRef__939992998
+  };
+type BankDetails__412066195 =
+  {
+    accountHolderName : Text;
+    accountNumber : Text;
+    bankName : Text;
+    ifscCode : Text
+  };
+type BankDetails__825436925 =
+  {
+    accountHolderName : Text;
+    accountNumber : Text;
+    bankName : Text;
+    ifscCode : Text
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type Data__846125122<T> = {var count : Nat__227979830; elements : [var ?T]};
+type ExternalBlob__220559234 = Blob;
+type FileRef__939992998 = ExternalBlob__220559234;
+type Id__274469729 = Nat;
+type Id__389469852 = Nat;
+type Int__616954475 = Int;
+type Int__789852381 = Int__616954475;
+type Internal__23036296<T> =
+  {children : [var ?Node__620761243<T>]; data : Data__846125122<T>};
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Leaf__948582970<T> = {data : Data__846125122<T>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type MembershipPlan__502144596 =
+  {
+    benefits : [Text];
+    id : Id__389469852;
+    name : Text;
+    popular : Bool;
+    price : Nat;
+    rewardDetails : Text;
+    validityDays : Nat
+  };
+type MembershipPlan__734370129 =
+  {
+    benefits : [Text];
+    id : Id__274469729;
+    name : Text;
+    popular : Bool;
+    price : Nat;
+    rewardDetails : Text;
+    validityDays : Nat
+  };
+type Membership__268620775 =
+  {
+    activatedAt : Timestamp__301639476;
+    expiresAt : Timestamp__301639476;
+    planId : Id__389469852;
+    planName : Text
+  };
+type Membership__973307029 =
+  {
+    activatedAt : Timestamp__771871407;
+    expiresAt : Timestamp__771871407;
+    planId : Id__274469729;
+    planName : Text
+  };
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    activeMemberships : {var value : Nat};
+    emailIndex : Map__230067015<Text, Principal>;
+    memberships : Map__230067015<Principal, Membership__973307029>;
+    mobileIndex : Map__230067015<Text, Principal>;
+    notificationNextId : {var value : Nat};
+    notifications : Map__230067015<Id__274469729, Notification__561474068>;
+    paymentNextId : {var value : Nat};
+    payments : Map__230067015<Id__274469729, PaymentSubmission__153719323>;
+    plans : Map__230067015<Id__274469729, MembershipPlan__734370129>;
+    profiles : Map__230067015<Principal, UserProfile__429904917>;
+    referralIndex : Map__230067015<Text, Principal>;
+    referralNextId : {var value : Nat};
+    referrals : Map__230067015<Id__274469729, ReferralRecord__278445849>;
+    settings : {var value : AdminSettings__1063935313};
+    ticketNextId : {var value : Nat};
+    tickets : Map__230067015<Id__274469729, SupportTicket__128766775>;
+    transactionNextId : {var value : Nat};
+    transactions :
+      Map__230067015<Id__274469729, WalletTransaction__226551985>;
+    verificationTokens : State__548007775;
+    verifiedEmails : State__344192770;
+    verifiedMobiles : Map__230067015<Text, Bool>;
+    withdrawalNextId : {var value : Nat};
+    withdrawals : Map__230067015<Id__274469729, WithdrawalRequest__685662801>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type Node__620761243<T> =
+  {#internal : Internal__23036296<T>; #leaf : Leaf__948582970<T>};
+type NotificationKind__660355567 =
+  {
+    #membershipActivated;
+    #membershipExpiring;
+    #paymentApproved;
+    #paymentRejected;
+    #paymentSubmitted;
+    #referralSuccessful;
+    #registration;
+    #rewardCredited;
+    #verification;
+    #withdrawalApproved;
+    #withdrawalCompleted;
+    #withdrawalRejected
+  };
+type NotificationKind__998259266 =
+  {
+    #membershipActivated;
+    #membershipExpiring;
+    #paymentApproved;
+    #paymentRejected;
+    #paymentSubmitted;
+    #referralSuccessful;
+    #registration;
+    #rewardCredited;
+    #verification;
+    #withdrawalApproved;
+    #withdrawalCompleted;
+    #withdrawalRejected
+  };
+type Notification__264708741 =
+  {
+    body : Text;
+    createdAt : Timestamp__301639476;
+    id : Id__389469852;
+    kind : NotificationKind__998259266;
+    read : Bool;
+    title : Text;
+    user : Principal
+  };
+type Notification__561474068 =
+  {
+    body : Text;
+    createdAt : Timestamp__771871407;
+    id : Id__274469729;
+    kind : NotificationKind__660355567;
+    read : Bool;
+    title : Text;
+    user : Principal
+  };
+type OldActor__512397517 = {};
+type PaymentStatus__1050999476 = {#approved; #pending; #rejected};
+type PaymentStatus__838381444 = {#approved; #pending; #rejected};
+type PaymentSubmission__153719323 =
+  {
+    amount : Nat;
+    id : Id__274469729;
+    planId : Id__274469729;
+    planName : Text;
+    rejectionReason : ?Text;
+    reviewedAt : ?Timestamp__771871407;
+    screenshot : ?Blob;
+    status : PaymentStatus__838381444;
+    submittedAt : Timestamp__771871407;
+    user : Principal;
+    utr : Text
+  };
+type PaymentSubmission__571970949 =
+  {
+    amount : Nat;
+    id : Id__389469852;
+    planId : Id__389469852;
+    planName : Text;
+    rejectionReason : ?Text;
+    reviewedAt : ?Timestamp__301639476;
+    screenshot : ?FileRef__939992998;
+    status : PaymentStatus__1050999476;
+    submittedAt : Timestamp__301639476;
+    user : Principal;
+    utr : Text
+  };
+type Pending__301187763 = {createdAt : Time__918999370; email : Text};
+type ReferralRecord__278445849 =
+  {
+    createdAt : Timestamp__771871407;
+    id : Id__274469729;
+    referred : Principal;
+    referrer : Principal;
+    rewardAmount : Nat;
+    rewardedAt : ?Timestamp__771871407;
+    status : ReferralStatus__938610910
+  };
+type ReferralRecord__552848942 =
+  {
+    createdAt : Timestamp__301639476;
+    id : Id__389469852;
+    referred : Principal;
+    referrer : Principal;
+    rewardAmount : Nat;
+    rewardedAt : ?Timestamp__301639476;
+    status : ReferralStatus__1068911364
+  };
+type ReferralStatus__1068911364 = {#eligible; #pending; #rejected; #rewarded};
+type ReferralStatus__938610910 = {#eligible; #pending; #rejected; #rewarded};
+type Set__1053317950<T> =
+  {var root : Node__620761243<T>; var size : Nat__227979830};
+type Set__70493310<T> = Set__1053317950<T>;
+type State__344192770 = {verifiedEmails : Set__70493310<Text>};
+type State__548007775 = {tokens : Map__230067015<Text, Pending__301187763>};
+type SupportTicket__128766775 =
+  {
+    createdAt : Timestamp__771871407;
+    id : Id__274469729;
+    message : Text;
+    status : TicketStatus__803986438;
+    subject : Text;
+    updatedAt : Timestamp__771871407;
+    user : Principal
+  };
+type SupportTicket__460240397 =
+  {
+    createdAt : Timestamp__301639476;
+    id : Id__389469852;
+    message : Text;
+    status : TicketStatus__648101983;
+    subject : Text;
+    updatedAt : Timestamp__301639476;
+    user : Principal
+  };
+type TicketStatus__648101983 = {#closed; #inProgress; #open; #resolved};
+type TicketStatus__803986438 = {#closed; #inProgress; #open; #resolved};
+type Time__418528263 = Int__789852381;
+type Time__918999370 = Time__418528263;
+type Timestamp__301639476 = Int;
+type Timestamp__771871407 = Int;
+type TransactionKind__247017751 = {#credit; #debit};
+type TransactionKind__971012238 = {#credit; #debit};
+type TransactionStatus__160635950 = {#completed; #failed; #pending};
+type TransactionStatus__203262454 = {#completed; #failed; #pending};
+type TransactionType__337436669 = {#payment; #referral; #reward; #withdrawal};
+type TransactionType__430720328 = {#payment; #referral; #reward; #withdrawal};
+type UpiDetails__440987639 = {accountHolderName : Text; upiId : Text};
+type UpiDetails__687461946 = {accountHolderName : Text; upiId : Text};
+type UserProfile__277265826 =
+  {
+    blocked : Bool;
+    email : Text;
+    fullName : Text;
+    mobile : Text;
+    profilePicture : ?FileRef__939992998;
+    referralCode : Text;
+    referredBy : ?Text;
+    registeredAt : Timestamp__301639476
+  };
+type UserProfile__429904917 =
+  {
+    blocked : Bool;
+    email : Text;
+    fullName : Text;
+    mobile : Text;
+    profilePicture : ?Blob;
+    referralCode : Text;
+    referredBy : ?Text;
+    registeredAt : Timestamp__771871407
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+type WalletTransaction__226551985 =
+  {
+    amount : Nat;
+    createdAt : Timestamp__771871407;
+    id : Id__274469729;
+    kind : TransactionKind__971012238;
+    reference : ?Text;
+    status : TransactionStatus__160635950;
+    txType : TransactionType__337436669;
+    user : Principal
+  };
+type WalletTransaction__850303578 =
+  {
+    amount : Nat;
+    createdAt : Timestamp__301639476;
+    id : Id__389469852;
+    kind : TransactionKind__247017751;
+    reference : ?Text;
+    status : TransactionStatus__203262454;
+    txType : TransactionType__430720328;
+    user : Principal
+  };
+type WithdrawalMethod__969336258 = {#bank; #upi};
+type WithdrawalMethod__991980292 = {#bank; #upi};
+type WithdrawalRequest__685662801 =
+  {
+    amount : Nat;
+    bank : ?BankDetails__825436925;
+    id : Id__274469729;
+    method : WithdrawalMethod__969336258;
+    paymentReference : ?Text;
+    rejectionReason : ?Text;
+    requestedAt : Timestamp__771871407;
+    reviewedAt : ?Timestamp__771871407;
+    status : WithdrawalStatus__314115308;
+    upi : ?UpiDetails__687461946;
+    user : Principal
+  };
+type WithdrawalRequest__770676552 =
+  {
+    amount : Nat;
+    bank : ?BankDetails__412066195;
+    id : Id__389469852;
+    method : WithdrawalMethod__991980292;
+    paymentReference : ?Text;
+    rejectionReason : ?Text;
+    requestedAt : Timestamp__301639476;
+    reviewedAt : ?Timestamp__301639476;
+    status : WithdrawalStatus__177126800;
+    upi : ?UpiDetails__440987639;
+    user : Principal
+  };
+type WithdrawalStatus__177126800 =
+  {#approved; #completed; #pending; #rejected};
+type WithdrawalStatus__314115308 =
+  {#approved; #completed; #pending; #rejected};
+{
+  "00000000_000000" : (old : OldActor__512397517) -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable activeMemberships : {var value : Nat};
+  stable emailIndex :
+    {var root : Node__204828119<Text, Principal>; var size : Nat__227979830};
+  stable memberships :
+    {
+      var root : Node__204828119<Principal, Membership__268620775>;
+      var size : Nat__227979830
+    };
+  stable mobileIndex :
+    {var root : Node__204828119<Text, Principal>; var size : Nat__227979830};
+  stable notificationNextId : {var value : Nat};
+  stable notifications :
+    {
+      var root : Node__204828119<Id__389469852, Notification__264708741>;
+      var size : Nat__227979830
+    };
+  stable paymentNextId : {var value : Nat};
+  stable payments :
+    {
+      var root : Node__204828119<Id__389469852, PaymentSubmission__571970949>;
+      var size : Nat__227979830
+    };
+  stable plans :
+    {
+      var root : Node__204828119<Id__389469852, MembershipPlan__502144596>;
+      var size : Nat__227979830
+    };
+  stable profiles :
+    {
+      var root : Node__204828119<Principal, UserProfile__277265826>;
+      var size : Nat__227979830
+    };
+  stable referralIndex :
+    {var root : Node__204828119<Text, Principal>; var size : Nat__227979830};
+  stable referralNextId : {var value : Nat};
+  stable referrals :
+    {
+      var root : Node__204828119<Id__389469852, ReferralRecord__552848942>;
+      var size : Nat__227979830
+    };
+  stable settings : {var value : AdminSettings__1068423478};
+  stable ticketNextId : {var value : Nat};
+  stable tickets :
+    {
+      var root : Node__204828119<Id__389469852, SupportTicket__460240397>;
+      var size : Nat__227979830
+    };
+  stable transactionNextId : {var value : Nat};
+  stable transactions :
+    {
+      var root : Node__204828119<Id__389469852, WalletTransaction__850303578>;
+      var size : Nat__227979830
+    };
+  stable verificationTokens :
+    {tokens : Map__230067015<Text, Pending__301187763>};
+  stable verifiedEmails : {verifiedEmails : Set__70493310<Text>};
+  stable verifiedMobiles :
+    {var root : Node__204828119<Text, Bool>; var size : Nat__227979830};
+  stable withdrawalNextId : {var value : Nat};
+  stable withdrawals :
+    {
+      var root : Node__204828119<Id__389469852, WithdrawalRequest__770676552>;
+      var size : Nat__227979830
+    }
+};

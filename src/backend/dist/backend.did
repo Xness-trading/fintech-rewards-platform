@@ -1,0 +1,462 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type WithdrawalView = 
+ record {
+   amount: nat;
+   bank: opt BankDetails;
+   id: Id;
+   method: WithdrawalMethod;
+   paymentReference: opt text;
+   rejectionReason: opt text;
+   requestedAt: Timestamp;
+   reviewedAt: opt Timestamp;
+   status: WithdrawalStatus;
+   upi: opt UpiDetails;
+ };
+type WithdrawalStatus = 
+ variant {
+   approved;
+   completed;
+   pending;
+   rejected;
+ };
+type WithdrawalResult = 
+ variant {
+   err: text;
+   ok: WithdrawalView;
+ };
+type WithdrawalMethod = 
+ variant {
+   bank;
+   upi;
+ };
+type WalletTransactionView = 
+ record {
+   amount: nat;
+   createdAt: Timestamp;
+   id: Id;
+   kind: TransactionKind;
+   reference: opt text;
+   status: TransactionStatus;
+   txType: TransactionType;
+ };
+type WalletSummary = 
+ record {
+   availableBalance: nat;
+   pendingRewards: nat;
+   referralRewards: nat;
+   totalRewards: nat;
+   totalWithdrawals: nat;
+   withdrawableBalance: nat;
+ };
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfileView = 
+ record {
+   blocked: bool;
+   email: text;
+   emailVerified: bool;
+   fullName: text;
+   mobile: text;
+   mobileVerified: bool;
+   "principal": principal;
+   profilePicture: opt FileRef;
+   referralCode: text;
+   referredBy: opt text;
+   registeredAt: Timestamp;
+ };
+type UpiWithdrawalInput = 
+ record {
+   accountHolderName: text;
+   amount: nat;
+   upiId: text;
+ };
+type UpiDetails = 
+ record {
+   accountHolderName: text;
+   upiId: text;
+ };
+type TransactionType = 
+ variant {
+   payment;
+   referral;
+   reward;
+   withdrawal;
+ };
+type TransactionStatus = 
+ variant {
+   completed;
+   failed;
+   pending;
+ };
+type TransactionKind = 
+ variant {
+   credit;
+   debit;
+ };
+type Timestamp = int;
+type TicketStatus = 
+ variant {
+   closed;
+   inProgress;
+   open;
+   resolved;
+ };
+type TicketInput = 
+ record {
+   message: text;
+   subject: text;
+ };
+type SupportTicketView = 
+ record {
+   createdAt: Timestamp;
+   id: Id;
+   message: text;
+   status: TicketStatus;
+   subject: text;
+   updatedAt: Timestamp;
+ };
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ReportRow = 
+ record {
+   newUsers: nat;
+   paymentAmount: nat;
+   payments: nat;
+   period: text;
+   withdrawalAmount: nat;
+   withdrawals: nat;
+ };
+type RegistrationResult = 
+ variant {
+   err: text;
+   ok: UserProfileView;
+ };
+type RegistrationInput = 
+ record {
+   email: text;
+   fullName: text;
+   mobile: text;
+   referralCode: opt text;
+ };
+type ReferralView = 
+ record {
+   createdAt: Timestamp;
+   id: Id;
+   referred: principal;
+   referrer: principal;
+   rewardAmount: nat;
+   rewardedAt: opt Timestamp;
+   status: ReferralStatus;
+ };
+type ReferralSummary = 
+ record {
+   pendingReferrals: nat;
+   referralCode: text;
+   referralLink: text;
+   successfulReferrals: nat;
+   totalReferrals: nat;
+   totalRewardEarned: nat;
+ };
+type ReferralStatus = 
+ variant {
+   eligible;
+   pending;
+   rejected;
+   rewarded;
+ };
+type ProfileUpdate = 
+ record {
+   fullName: text;
+   profilePicture: opt FileRef;
+ };
+type PlanUpdate = 
+ record {
+   benefits: vec text;
+   rewardDetails: text;
+   validityDays: nat;
+ };
+type PaymentView = 
+ record {
+   amount: nat;
+   id: Id;
+   planId: Id;
+   planName: text;
+   rejectionReason: opt text;
+   reviewedAt: opt Timestamp;
+   screenshot: opt FileRef;
+   status: PaymentStatus;
+   submittedAt: Timestamp;
+   user: principal;
+   utr: text;
+ };
+type PaymentStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+ };
+type PaymentResult = 
+ variant {
+   err: text;
+   ok: PaymentView;
+ };
+type PaymentInput = 
+ record {
+   planId: Id;
+   screenshot: opt FileRef;
+   utr: text;
+ };
+type NotificationView = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: Id;
+   kind: NotificationKind;
+   read: bool;
+   title: text;
+ };
+type NotificationKind = 
+ variant {
+   membershipActivated;
+   membershipExpiring;
+   paymentApproved;
+   paymentRejected;
+   paymentSubmitted;
+   referralSuccessful;
+   registration;
+   rewardCredited;
+   verification;
+   withdrawalApproved;
+   withdrawalCompleted;
+   withdrawalRejected;
+ };
+type MembershipPlan = 
+ record {
+   benefits: vec text;
+   id: Id;
+   name: text;
+   popular: bool;
+   price: nat;
+   rewardDetails: text;
+   validityDays: nat;
+ };
+type Id = nat;
+type FileRef = blob;
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BankWithdrawalInput = 
+ record {
+   accountHolderName: text;
+   accountNumber: text;
+   amount: nat;
+   bankName: text;
+   ifscCode: text;
+ };
+type BankDetails = 
+ record {
+   accountHolderName: text;
+   accountNumber: text;
+   bankName: text;
+   ifscCode: text;
+ };
+type AdminSettingsUpdate = 
+ record {
+   companyUpiId: text;
+   minWithdrawalAmount: nat;
+   paymentQrImage: opt FileRef;
+ };
+type AdminSettings = 
+ record {
+   companyUpiId: text;
+   minWithdrawalAmount: nat;
+   paymentQrImage: opt FileRef;
+ };
+type AdminOverview = 
+ record {
+   activeMemberships: nat;
+   pendingPayments: nat;
+   pendingWithdrawals: nat;
+   totalPaymentAmount: nat;
+   totalReferralRewards: nat;
+   totalUsers: nat;
+   totalWithdrawals: nat;
+   verifiedPayments: nat;
+ };
+service : {
+  _caffeineEmailConfirmVerification: (token: text) ->
+   (variant {
+      err: text;
+      ok: text;
+    });
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Admin: approve a payment and activate the membership.
+  adminApprovePayment: (paymentId: Id) -> (opt PaymentView);
+  /// Admin: approve and credit a referral reward.
+  adminApproveReferralReward: (referralId: Id) -> (opt ReferralView);
+  /// Admin: approve a withdrawal request.
+  adminApproveWithdrawal: (withdrawalId: Id) -> (opt WithdrawalView);
+  /// Admin: daily report rows.
+  adminDailyReport: () -> (vec ReportRow) query;
+  /// Admin: export report rows as CSV.
+  adminExportReportCsv: () -> (text) query;
+  /// Admin: read the overview metrics.
+  adminGetOverview: () -> (AdminOverview) query;
+  /// Admin: read one user's profile.
+  adminGetUser: (user: principal) -> (opt UserProfileView) query;
+  /// Admin: list every payment submission.
+  adminListPayments: () -> (vec PaymentView) query;
+  /// Admin: list every referral record.
+  adminListReferrals: () -> (vec ReferralView) query;
+  /// Admin: list every support ticket.
+  adminListSupportTickets: () -> (vec SupportTicketView) query;
+  /// Admin: list every registered user.
+  adminListUsers: () -> (vec UserProfileView) query;
+  /// Admin: list every withdrawal request.
+  adminListWithdrawals: () -> (vec WithdrawalView) query;
+  /// Admin: mark a referral eligible.
+  adminMarkReferralEligible: (referralId: Id) -> (opt ReferralView);
+  /// Admin: mark an approved withdrawal as paid.
+  adminMarkWithdrawalPaid: (withdrawalId: Id, reference: text) ->
+   (opt WithdrawalView);
+  /// Admin: monthly report rows.
+  adminMonthlyReport: () -> (vec ReportRow) query;
+  /// Admin: reject a payment with a reason.
+  adminRejectPayment: (paymentId: Id, reason: text) -> (opt PaymentView);
+  /// Admin: reject a referral record.
+  adminRejectReferral: (referralId: Id) -> (opt ReferralView);
+  /// Admin: reject a withdrawal request with a reason.
+  adminRejectWithdrawal: (withdrawalId: Id, reason: text) ->
+   (opt WithdrawalView);
+  /// Admin: search users by name, email or mobile.
+  adminSearchUsers: (term: text) -> (vec UserProfileView) query;
+  /// Admin: update a support ticket's status.
+  adminSetTicketStatus: (ticketId: Id, status: TicketStatus) ->
+   (opt SupportTicketView);
+  /// Admin: block or unblock a user.
+  adminSetUserBlocked: (user: principal, blocked: bool) -> (bool);
+  /// Admin: edit a plan's benefits, reward details and validity.
+  adminUpdatePlan: (planId: Id, update: PlanUpdate) -> (opt MembershipPlan);
+  /// Admin: update the platform settings.
+  adminUpdateSettings: (update: AdminSettingsUpdate) -> (AdminSettings);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  execute: (qJson: text) -> (Result) query;
+  /// Read the platform settings (company UPI id, QR image, minimum withdrawal).
+  getAdminSettings: () -> (AdminSettings) query;
+  getApiDoc: () -> (text) query;
+  /// Read the caller's own profile.
+  getCallerProfile: () -> (opt UserProfileView) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// Read one plan by id.
+  getPlan: (planId: Id) -> (opt MembershipPlan) query;
+  /// Read the caller's referral summary.
+  getReferralSummary: () -> (ReferralSummary) query;
+  /// Count the caller's unread notifications.
+  getUnreadNotificationCount: () -> (nat) query;
+  /// Read the caller's wallet balances.
+  getWalletSummary: () -> (WalletSummary) query;
+  isCallerAdmin: () -> (bool) query;
+  /// Whether the caller's email is verified.
+  isCallerEmailVerified: () -> (bool) query;
+  /// Whether the caller's mobile is verified.
+  isCallerMobileVerified: () -> (bool) query;
+  /// List the caller's notifications.
+  listMyNotifications: () -> (vec NotificationView) query;
+  /// List the caller's own payment submissions.
+  listMyPayments: () -> (vec PaymentView) query;
+  /// List the caller's referral records.
+  listMyReferrals: () -> (vec ReferralView) query;
+  /// List the caller's own support tickets.
+  listMySupportTickets: () -> (vec SupportTicketView) query;
+  /// List the caller's wallet ledger entries.
+  listMyTransactions: () -> (vec WalletTransactionView) query;
+  /// List the caller's own withdrawal requests.
+  listMyWithdrawals: () -> (vec WithdrawalView) query;
+  /// List the seven fixed membership plans.
+  listPlans: () -> (vec MembershipPlan) query;
+  /// Mark all of the caller's notifications read.
+  markAllNotificationsRead: () -> ();
+  /// Mark one of the caller's notifications read.
+  markNotificationRead: (notificationId: Id) -> (bool);
+  /// Register the caller's profile. Requires a signed-in caller.
+  registerUser: (input: RegistrationInput) -> (RegistrationResult);
+  /// Request a bank withdrawal.
+  requestBankWithdrawal: (input: BankWithdrawalInput) -> (WithdrawalResult);
+  /// Request a UPI withdrawal.
+  requestUpiWithdrawal: (input: UpiWithdrawalInput) -> (WithdrawalResult);
+  schema: () -> (text) query;
+  /// Submit a manual UPI payment for a plan.
+  submitPayment: (input: PaymentInput) -> (PaymentResult);
+  /// Submit a support ticket.
+  submitSupportTicket: (input: TicketInput) -> (SupportTicketView);
+  /// Update the caller's editable profile fields.
+  updateCallerProfile: (update: ProfileUpdate) -> (opt UserProfileView);
+}

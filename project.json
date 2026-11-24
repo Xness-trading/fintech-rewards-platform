@@ -1,0 +1,28 @@
+{
+  "overview": "A premium dark-navy Indian fintech rewards and membership platform with secure sign-in, seven membership plans, manual UPI payment verification, wallet, referrals, withdrawals and a secure admin console.",
+  "features": [
+    "Secure sign-in with a personal registration profile",
+    "Personal dashboard with wallet, rewards, referrals and membership summary",
+    "Seven membership plans from ₹150 to ₹9,999 with a highlighted popular plan",
+    "Manual UPI payment with QR code, UTR entry and screenshot upload",
+    "Admin verification that activates membership and records transactions",
+    "Wallet with balances and credit/debit history",
+    "Referral system with unique code, share link and ₹199 rewards",
+    "UPI and bank withdrawal requests with admin review",
+    "Profile management with picture upload",
+    "In-app alerts and email notifications",
+    "Transaction history with type filters",
+    "Customer support with complaint form and policies",
+    "Separate secure admin console for users, payments, withdrawals, plans and referrals"
+  ],
+  "category": "fintech",
+  "tags": [
+    "fintech",
+    "rewards",
+    "membership",
+    "wallet",
+    "referrals",
+    "admin"
+  ],
+  "last_updated": "2026-11-04T09:13:46.301Z"
+}
